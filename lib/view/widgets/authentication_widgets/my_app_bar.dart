@@ -4,7 +4,8 @@ import '../../screens/authentication/login_screen.dart';
 
 class MyAppBar extends StatelessWidget {
   final String title;
-  const MyAppBar({required this.title,Key? key}) : super(key: key);
+
+  const MyAppBar({required this.title, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class MyAppBar extends StatelessWidget {
         },
         icon: const Icon(Icons.arrow_back),
       ),
-      title:  Text(title),
+      title: Text(title),
     );
   }
 }

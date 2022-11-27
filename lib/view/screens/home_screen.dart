@@ -4,10 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const String routeName="HomeScreen";
+  static const String routeName = "HomeScreen";
 
- HomeScreen({Key? key}) : super(key: key);
-  String? email= FirebaseAuth.instance.currentUser!.email;
+  HomeScreen({Key? key}) : super(key: key);
+  String? email = FirebaseAuth.instance.currentUser!.email;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,10 +20,13 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(email!),
-                ElevatedButton(onPressed: (){
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-                }, child: Text("log out"))
+                ElevatedButton(
+                    onPressed: () {
+                      FirebaseAuth.instance.signOut();
+                      Navigator.pushReplacementNamed(
+                          context, LoginScreen.routeName);
+                    },
+                    child: Text("log out"))
               ],
             ),
           ),

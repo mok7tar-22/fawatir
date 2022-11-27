@@ -7,15 +7,16 @@ part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
-  static LoginCubit get(context)=>BlocProvider.of(context);
 
-  login({required String emailAddress,required String password})async{
+  static LoginCubit get(context) => BlocProvider.of(context);
+  bool visible = false;
+  bool isLoading = false;
+
+  login({required String emailAddress, required String password}) async {
     try {
       emit(LoginLoading());
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailAddress,
-          password: password
-      );
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailAddress, password: password);
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -23,9 +24,13 @@ class LoginCubit extends Cubit<LoginState> {
       } else if (e.code == 'wrong-password') {
         emit(LoginFailure('Wrong password provided for that user.'));
       }
-    }
-    catch(error){
+    } catch (error) {
       emit(LoginFailure(error.toString()));
     }
+  }
+
+  changeVisibility() {
+    visible = !visible;
+    emit(ChangePasswordVisibility());
   }
 }
